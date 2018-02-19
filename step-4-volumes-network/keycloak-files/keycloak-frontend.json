@@ -1,0 +1,7 @@
+{
+  "realm": "happy-foot",
+  "auth-server-url": "http://keycloak-keycloak.192.168.99.100.nip.io/auth",
+  "ssl-required": "external",
+  "resource": "frontend",
+  "public-client": true
+}

@@ -1,0 +1,65 @@
+# Version de Docker Compose File
+version: '2'
+# Microservicios que se van a levantar para hacer funcionar la aplicación o servicio 
+services:
+  # Id de servicio
+  backend:
+    # Imagen a utilizar para este servicio
+    image: poc-docker/api
+    # Nombre que tendrá el contenedor 
+    container_name: api-backend
+    # Configuraciones de despliegue
+    deploy:
+      # Cantidad de replicas de este servicio
+      replicas: 1
+      # Política de reinicio
+      restart_policy:
+        condition: on-failure
+    # Permite definir dependencia con otro servicio
+    depends_on:
+      # Indica que depende del servicio db para iniciar
+      db:
+        # Condición para que desencadene la creación del servicio
+        condition: service_healthy
+    # Volumenes que se montarán en conjunto con el contenedor
+    volumes:
+      - ./keycloak-files:/src/sso
+    # Red docker a la que pertenecerá el contenedor
+    networks:
+      - apinet
+    # Mapeo de puertos
+    ports:
+      - "0.0.0.0:3100":"3100"
+  # Id de servicio
+  db:
+    # Imagen a utilizar para este servicio
+    image: "mysql:5.7"
+    # Nombre que tendrá el contenedor
+    container_name: mysql
+    # Configuraciones de despliegue
+    deploy:
+      # Cantidad de replicas de este servicio
+      replicas: 1
+      # Política de reinicio
+      restart_policy:
+        condition: on-failure
+    # Variables de entorno
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: happyfoot_db
+    # Configuración de healthchecks 
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-ppassword"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    # Volumenes que se montarán en conjunto con el contenedor
+    volumes:
+      - ./data:/var/lib/mysql
+    # Red docker a la que pertenecerá el contenedor
+    networks:
+      - apinet
+# Red docker que se va a ocupar
+networks:
+  apinet:
