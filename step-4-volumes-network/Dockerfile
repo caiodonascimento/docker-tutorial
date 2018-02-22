@@ -5,7 +5,7 @@
 FROM poc-docker/git as git
 
 # Declaramos variables de entorno
-ENV GIT_REPO=https://bitbucket.org/happyfoot/api-backend.git \
+ENV GIT_REPO=https://github.com/caiodonascimento/backend-services.git \
     SOURCE_DIR=source-dir
 
 # Descarga repositorio que indica la variable de entorno GIT_REPO en la ruta que indica la variable de entorno SOURCE_DIR
