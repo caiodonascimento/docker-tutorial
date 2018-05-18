@@ -39,4 +39,4 @@ WORKDIR src
 COPY --from=npm /src/ ./
 
 # Comando que se debe ejecutar al crear el contenedor
-ENTRYPOINT ["node", "server.js"]
+ENTRYPOINT node server.js

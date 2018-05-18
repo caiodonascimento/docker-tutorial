@@ -1,0 +1,38 @@
+{
+  "others": {
+    "port": 3100,
+    "ip": "0.0.0.0",
+    "logModel": "combined",
+    "sessionSecret": "secret",
+    "keycloakRealm": "happy-foot",
+    "keycloakSettings": {
+      "baseUrl": "http://keycloak-keycloak.192.168.99.100.nip.io/auth",
+      "username": "admin",
+      "password": "admin",
+      "grant_type": "password",
+      "client_id": "admin-cli"
+    },
+    "logoutUri": "/api/auth/logout"
+  },
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "happyfoot_db",
+    "host": "mysql",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "happyfoot_db",
+    "host": "mysql",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "password",
+    "database": "happyfoot_db",
+    "host": "mysql",
+    "dialect": "mysql"
+  }
+}
